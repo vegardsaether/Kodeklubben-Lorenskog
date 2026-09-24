@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+    <link rel="stylesheet" href="plugin/chalkboard/style.css">
+
+    <link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<!--transition="fade" -->
+
+# Velkommen til Kodeklubben i Lørenskog! 🚀
+
+<div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 35px;">
+  <div style="background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px);">
+    👨‍🏫 <strong>Vegard Sæther</strong>
+  </div>
+  <div style="background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px);">
+    👩‍🏫 <strong>Vivana Sortland</strong>
+  </div>
+  <div style="background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px);">
+    👨‍🏫 <strong>Salam Haider</strong>
+  </div>
+  <div style="background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px);">
+    👨‍🏫 <strong>Talha Aker</strong>
+</div>
+  <div style="background: rgba(255,255,255,0.08); padding: 12px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); backdrop-filter: blur(10px);">
+    👨‍🏫 <strong>Junaid Hussain</strong>
+  </div>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="convex" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Praktisk info 🛠️
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left; margin-top: 30px;">
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 5px solid #00d2ff;" class="fragment fade-up">
+  <h4>📅 Når?</h4>
+  <p>Én onsdag og én torsdag i måneden (Kl. 18:00 - 19:30)</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 5px solid #3a7bd5;" class="fragment fade-up">
+  <h4>📍 Hvor?</h4>
+  <p>Her på Lørenskog bibliotek!</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 5px solid #ff007f;" class="fragment fade-up">
+  <h4>💻 Hva trenger du?</h4>
+  <p>Egen PC med USB A- utgang (hvis du har). Det er kanskje også mulig å bruke Ipad fra skolen.</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border-left: 5px solid #00ff88;" class="fragment fade-up">
+  <h4>🤖 Utlån:</h4>
+  <p>Vi har mange <strong>micro:bits</strong> og <strong>bitbots</strong> til utlån som vi har fått fra Lær Kidsa Koding!</p>
+</div>
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="slide" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Hva er programmering? 🤔
+
+<div style="margin-top: 40px;">
+
+<div style="background: rgba(0, 210, 255, 0.1); border: 1px solid #00d2ff; padding: 25px; border-radius: 16px; margin-bottom: 25px; text-align: left;" class="fragment fade-right">
+  <h3 style="color: #00d2ff; margin-bottom: 10px;">📝 Å gi instruksjoner</h3>
+  <p>Programmering handler rett og slett om å gi datamaskinen en oppskrift på hva den skal gjøre.</p>
+</div>
+
+<div style="background: rgba(255, 0, 127, 0.1); border: 1px solid #ff007f; padding: 25px; border-radius: 16px; text-align: left;" class="fragment fade-left">
+  <h3 style="color: #ff007f; margin-bottom: 10px;">🤖 Datamaskiner...</h3>
+  <p>...gjør <em>nøyaktig</em> det vi ber dem om – verken mer eller mindre.</p>
+</div>
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="convex" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Tekst vs. Blokk 💻
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; text-align: left; margin-top: 20px;">
+<div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);" markdown="1">
+
+### 📄 Tekstprogrammering
+
+```python
+while True:
+    print("Hei, Lørenskog!")
+```
+* 🚀 Ubegrensede muligheter!
+* ❌ Men lett å gjøre skrivefeil
+* ❌ Mye syntaks å huske
+
+</div>
+<div style="background: rgba(0, 255, 136, 0.08); padding: 25px; border-radius: 16px; border: 1px solid #00ff88;" markdown="1">
+
+### 🧩 Blokkprogrammering
+* Puslespillbrikker på skjermen! 🧩 <!-- .element: class="fragment fade-up" -->
+* Ingen skrivefeil eller glemte tegn! 🎯 <!-- .element: class="fragment fade-up" -->
+* Fokus på logikken, ikke tastingen! 🔥 <!-- .element: class="fragment fade-up" -->
+
+</div>
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="slide" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Slik fungerer blokker 🧩
+
+<div style="display: flex; flex-direction: column; gap: 20px; margin-top: 30px; text-align: left;">
+
+<div style="background: linear-gradient(90deg, rgba(255, 154, 0, 0.2), transparent); border-left: 6px solid #ff9a00; padding: 18px 25px; border-radius: 12px;" class="fragment fade-up">
+  <h4 style="color: #ff9a00; margin: 0 0 5px 0;">⚡ Hendelser (Events)</h4>
+  <p style="margin: 0;"><em>"Når knapp A trykkes..."</em></p>
+</div>
+
+<div style="background: linear-gradient(90deg, rgba(0, 210, 255, 0.2), transparent); border-left: 6px solid #00d2ff; padding: 18px 25px; border-radius: 12px;" class="fragment fade-up">
+  <h4 style="color: #00d2ff; margin: 0 0 5px 0;">🎬 Handlinger (Actions)</h4>
+  <p style="margin: 0;"><em>"...kjør til høyre."</em></p>
+</div>
+
+<div style="background: linear-gradient(90deg, rgba(0, 255, 136, 0.2), transparent); border-left: 6px solid #00ff88; padding: 18px 25px; border-radius: 12px;" class="fragment fade-up">
+  <h4 style="color: #00ff88; margin: 0 0 5px 0;">🔄 Løkker (Loops)</h4>
+  <p style="margin: 0;"><em>"...gjenta dette for alltid!"</em></p>
+</div>
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="zoom" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Hva skal vi bruke i dag? 🛠️
+
+<div style="background: rgba(255,255,255,0.05); padding: 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); margin-top: 30px;">
+
+### <span style="color: #00d2ff;">MakeCode</span> / <span style="color: #00ff88;">micro:bit</span> / <span style="color: #ff007f;">bit:bot</span> ⚡
+
+<hr style="border: 0; height: 1px; background: rgba(255,255,255,0.2); margin: 25px 0;">
+
+*  🏎️ Vi skal kode bilen til å **følge en linje**!
+* 🧩 Husk at **formen på blokkene** kan hjelpe deg med å se hvordan de passer sammen.
+
+</div>
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" transition="convex" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Overføre koden til micro:bit 🔌
+
+<div style="display: flex; flex-direction: column; gap: 20px; text-align: left; margin-top: 30px;">
+Når blokkene er lagt opp kan du overføre koden til micro:bit.
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);" class="fragment fade-up">
+  <h4 style="color: #00d2ff; margin-bottom: 8px;">1. Koble til USB-ledningen 🔌</h4>
+  <p style="margin: 0; font-size: 0.9em;">Plugg USB A-ledningen inn i PC-en og micro-USB-enden i micro:biten. Pass på å setter ledningen forsiktig og riktig vei!</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);" class="fragment fade-up">
+  <h4 style="color: #00ff88; margin-bottom: 8px;">2. Last ned og sammenkoble (Pair) 📥</h4>
+  <p style="margin: 0; font-size: 0.9em;">Trykk knappen <strong>"Last ned"</strong>, <strong>"Neste"</strong> og <strong>"Pair"</strong> i MakeCode, deretter <strong>"Last ned"</strong>. (Alternativt: flytt fila manuelt over).</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);" class="fragment fade-up">
+  <h4 style="color: #ff9a00; margin-bottom: 8px;">3. Sett i Bitbot 🏎️</h4>
+  <p style="margin: 0; font-size: 0.9em;">Set micro:bit inn i bitbot-bilen. ⚠️ <em>Husk at bilen bør være avslått før du setter den inn.</em></p>
+</div>
+
+</div>
+</div></script></section><section ><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" transition="convex" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Dagens første oppgave: Følg linjen! 🎯
+
+<div style="display: flex; flex-direction: column; gap: 15px; margin-top: 25px; text-align: left;">
+
+<div style="background: rgba(255,255,255,0.06); padding: 15px 20px; border-radius: 12px; border-left: 4px solid #00d2ff;" >
+  <strong>1.</strong> Åpne nettleseren på PC-en din 🌐
+</div>
+
+<div style="background: rgba(255,255,255,0.06); padding: 15px 20px; border-radius: 12px; border-left: 4px solid #3a7bd5;">
+  <strong>2.</strong> Gå inn på <a href="https://microbit.org" target="_blank" style="color: #00d2ff; text-decoration: underline;">https://makecode.microbit.org</a> 🔗
+</div>
+
+<div style="background: rgba(255,255,255,0.06); padding: 15px 20px; border-radius: 12px; border-left: 4px solid #9b51e0;" >
+  <strong>3.</strong> Opprett et nytt prosjekt (kall det hva du vil) ➕
+</div>
+
+<div style="background: rgba(255,255,255,0.06); padding: 15px 20px; border-radius: 12px; border-left: 4px solid #ff007f;" >
+  <strong>4.</strong> Legg til utvidelsen: <strong>Bitbot</strong> 📦
+</div>
+
+<div style="background: rgba(255,255,255,0.06); padding: 15px 20px; border-radius: 12px; border-left: 4px solid #00ff88;" >
+  <strong>5.</strong> Sett opp blokkene slik at bilen følger linjen! 🏎️💨
+</div>
+
+</div>
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" transition="slide" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Blokker du trenger 🧩
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 16px;">
+
+<div markdown="1">
+
+- <img src="Kodeklubben lørenskog/Bilder/BitBot-start.png" alt="" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/gjenta_for_alltid.png" alt="" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/hvis.png" alt="" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/BitBot_linjesensor.png" alt="" style="object-fit: scale-down">
+
+
+</div>
+
+<div markdown="1">
+
+- <img src="Kodeklubben lørenskog/Bilder/==.png" alt="" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/&&.png" alt="" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/bitbot.move(BBMotor.Left, BBDirection.Reverse, 60).png" alt="e(BBMotor.Left, BBDirection.Reverse, 60).png" style="object-fit: scale-down">
+
+- <img src="Kodeklubben lørenskog/Bilder/bitbot.stop(BBStopMode.Coast).png" alt="" style="object-fit: scale-down">
+
+
+</div>
+
+</div>
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" background="linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%)" transition="zoom" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# <span style="text-shadow: 0 4px 20px rgba(0,0,0,0.4); color: #ffffff;">Klar, ferdig... KOD! </span> 🚀
+
+<div style="margin-top: 40px; background: rgba(0,0,0,0.25); padding: 20px 30px; border-radius: 50px; display: inline-block; backdrop-filter: blur(5px);">
+  <h3 style="margin: 0; color: #fff;">Spør oss veiledere hvis du sitter fast! 💡</h3>
+</div>
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" transition="slide" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Løsningsforslag (Blokker) 💡
+
+<img src="Kodeklubben lørenskog/Bilder/Fasit_Bitbot_folge_linje.png" alt="" style="object-fit: scale-down">
+</div></script></section><section data-separator="?
+---?
+" data-separator-vertical="?
+--?
+" data-separator-notes="note:" data-markdown><script type="text/template"><!-- .slide: class="drop" transition="slide" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Løsningsforslag (Kode) 💻
+
+```javascript
+bitbot.select_model(BBModel.XL)
+basic.forever(function () {
+if (bitbot.readLine(BBLineSensor.Left) == 1 && 
+bitbot.readLine(BBLineSensor.Right) == 0) {
+bitbot.move(BBMotor.Left, BBDirection.Reverse, 10)
+bitbot.move(BBMotor.Right, BBDirection.Forward, 15)
+} else if (bitbot.readLine(BBLineSensor.Left) == 0 && 
+bitbot.readLine(BBLineSensor.Right) == 1) {
+bitbot.move(BBMotor.Left, BBDirection.Forward, 15)
+bitbot.move(BBMotor.Right, BBDirection.Reverse, 10)
+} else if (bitbot.readLine(BBLineSensor.Left) == 0 && 
+bitbot.readLine(BBLineSensor.Right) == 0) {
+bitbot.move(BBMotor.Left, BBDirection.Forward, 15)
+bitbot.move(BBMotor.Right, BBDirection.Forward, 15)
+} else {bitbot.stop(BBStopMode.Coast)}})
+```
+</div></script></section></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/obsidian-markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.umd.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+    <script src="plugin/chalkboard/plugin.js"></script>
+    <script src="plugin/reveal-pointer/pointer.js"></script>
+    <script src="plugin/elapsed-time-bar/elapsed-time-bar.js"></script>
+
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            // normalize to rgb(a)
+            const optionEl = document.createElement("option");
+            optionEl.style.color = color;
+            const normalizedColor = optionEl.style.color;
+
+            const match = normalizedColor.match(/(\d+), (\d+), (\d+)/);
+            if (!match) return false;
+            const [, c_r, c_g, c_b] = match;
+
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                ObsidianMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.KaTeX,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+                RevealMenu,
+                RevealPointer,
+                RevealChalkboard,
+                ElapsedTimeBar
+            ],
+            allottedTime: "120",
+
+            katex: {
+                local: 'plugin/math/katex',
+                extensions: ["mhchem"],
+            },
+            markdown: {
+                gfm: true,
+            },
+            mermaid: {
+                theme: isLight(bgColor) ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                    {
+                        id: 'toggle-overview',
+                        title: 'Toggle overview (O)',
+                        icon: '<i class="fa fa-th"></i>',
+                        action: 'Reveal.toggleOverview();'
+                    },
+                    {
+                        icon: '<i class="fa fa-pen-square"></i>',
+                        title: 'Toggle chalkboard (B)',
+                        action: 'RevealChalkboard.toggleChalkboard();'
+                    },
+                    {
+                        icon: '<i class="fa fa-pen"></i>',
+                        title: 'Toggle notes canvas (C)',
+                        action: 'RevealChalkboard.toggleNotesCanvas();'
+                    },
+                ]
+            },
+            menu: {
+                loadIcons: false
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"default","width":960,"height":700,"margin":0.04}, queryOptions);
+    </script>
+
+    <script>
+      /**
+       * KaTeX Equation Numbering Note
+       *
+       * KaTeX maintains a global equation counter for \begin{equation} environments.
+       * When navigating between slides, reveal.js math plugin may re-render math, causing
+       * equation numbers to change randomly.
+       *
+       * Note: Regular $$ blocks don't have equation numbers - only \begin{equation} does.
+       *
+       * If you experience issues with equation numbers changing:
+       * Use manual \tag{} commands: \begin{equation}\tag{1} ... \end{equation}
+       */
+
+      Reveal.initialize(options);
+    </script>
+    <!-- created with Slides Extended reveal.html template -->
+</body>
+</html>
