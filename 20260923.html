@@ -351,19 +351,20 @@ Når blokkene er lagt opp kan du overføre koden til micro:bit.
 
 ```javascript
 bitbot.select_model(BBModel.XL)
-basic.forever(function () {
-    if (bitbot.readLine(BBLineSensor.Left) == 1 && bitbot.readLine(BBLineSensor.Right) == 0) {
-        bitbot.move(BBMotor.Left, BBDirection.Reverse, 40)
-        bitbot.move(BBMotor.Right, BBDirection.Forward, 100)
-    } else if (bitbot.readLine(BBLineSensor.Left) == 0 && bitbot.readLine(BBLineSensor.Right) == 1) {
-        bitbot.move(BBMotor.Left, BBDirection.Forward, 100)
-        bitbot.move(BBMotor.Right, BBDirection.Reverse, 40)
-    } else if (bitbot.readLine(BBLineSensor.Left) == 1 && bitbot.readLine(BBLineSensor.Right) == 1) {
-        bitbot.move(BBMotor.Left, BBDirection.Forward, 20)
-    } else {
-        bitbot.stop(BBStopMode.Coast)
-    }
-})
+basic.forever(function () {
+if (bitbot.readLine(BBLineSensor.Left) == 1 && 
+bitbot.readLine(BBLineSensor.Right) == 0) {
+bitbot.move(BBMotor.Left, BBDirection.Reverse, 10)
+bitbot.move(BBMotor.Right, BBDirection.Forward, 15)
+} else if (bitbot.readLine(BBLineSensor.Left) == 0 && 
+bitbot.readLine(BBLineSensor.Right) == 1) {
+bitbot.move(BBMotor.Left, BBDirection.Forward, 15)
+bitbot.move(BBMotor.Right, BBDirection.Reverse, 10)
+} else if (bitbot.readLine(BBLineSensor.Left) == 0 && 
+bitbot.readLine(BBLineSensor.Right) == 0) {
+bitbot.move(BBMotor.Left, BBDirection.Forward, 15)
+bitbot.move(BBMotor.Right, BBDirection.Forward, 15)
+} else {bitbot.stop(BBStopMode.Coast)}})
 ```
 </div></script></section></section></div>
     </div>
