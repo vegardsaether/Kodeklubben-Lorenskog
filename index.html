@@ -1,300 +1,230 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="no">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-
-    <title></title>
-    <link rel="stylesheet" href="dist/reset.css">
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/league.css" id="theme" />
-    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
-    <link rel="stylesheet" href="plugin/customcontrols/style.css">
-    <link rel="stylesheet" href="plugin/chalkboard/style.css">
-
-    <link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
-
-
-    <script defer src="dist/fontawesome/all.min.js"></script>
-
-    <script type="text/javascript">
-        function pageInIframe() {
-            return (window.location !== window.parent.location);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kodeklubben Lørenskog - Presentasjoner</title>
+    <style>
+        :root {
+            /* Stilrene, mørke Obsidian-farger */
+            --bg-color: #0b0f19;       /* Helt mørk, nesten svart bakgrunn */
+            --card-bg: #161b26;        /* Litt lysere mørk for innholdet */
+            --sidebar-bg: #0f1420;     /* Mørk farge for sidemenyen */
+            --text-color: #f3f4f6;     /* Hvit/lys grå tekst */
+            --text-muted: #9ca3af;     /* Dempet grå tekst for datoer/småting */
+            --accent-color: #3b82f6;   /* Kodeklubben-blå for lenker og aktive valg */
+            --border-color: #1f2937;   /* Diskrete rammer */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        let forgetPop = true;
-        function onPopState(event) {
-            if(forgetPop){
-                forgetPop = false;
-            } else if( pageInIframe()) {
-                parent.postMessage(event.target.location.href, "app://obsidian.md");
-            }
-        }
-        window.onpopstate = onPopState;
-        window.onmessage = event => {
-            if(event.data == "reload"){
-                window.document.location.reload();
-            }
-            forgetPop = true;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        function fitElements() {
-            const itemsToFit = document.getElementsByClassName('fitText');
-            for (const item in itemsToFit) {
-                if (Object.hasOwnProperty.call(itemsToFit, item)) {
-                    const element = itemsToFit[item];
-                    fitElement(element, 1, 1000);
-                    element.classList.remove('fitText');
-                }
-            }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            min-height: 100vh;
+            line-height: 1.6;
         }
 
-        function fitElement(element, start, end) {
-
-            let size = (end + start) / 2;
-            element.style.fontSize = `${size}px`;
-
-            if (Math.abs(start - end) < 1) {
-                while (element.scrollHeight > element.offsetHeight) {
-                    size--;
-                    element.style.fontSize = `${size}px`;
-                }
-                return;
-            }
-
-            if (element.scrollHeight > element.offsetHeight) {
-                fitElement(element, start, size);
-            } else {
-                fitElement(element, size, end);
-            }
+        /* Sidemeny (Sidebar) */
+        aside {
+            width: 300px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
         }
 
-        document.onreadystatechange = () => {
-            fitElements();
-            if (document.readyState === 'complete') {
-                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
-                    parent.postMessage(event.target.location.href, "app://obsidian.md");
-                }
-                if (window.location.href.indexOf("print-pdf") != -1){
-                    let stateCheck = setInterval(() => {
-                        clearInterval(stateCheck);
-                        window.print();
-                    }, 250);
-                }
+        aside h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Gruppering av møter per år i menyen */
+        .menu-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .menu-section-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        aside ul {
+            list-style: none;
+        }
+
+        aside li {
+            margin-bottom: 0.6rem;
+        }
+
+        aside a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: monospace; /* Gjør datoformatet ÅÅÅÅMMDD veldig ryddig */
+            transition: all 0.2s ease;
+        }
+
+        aside a:hover {
+            color: var(--text-color);
+            background-color: var(--border-color);
+        }
+
+        /* Stil for den aktive/valgte presentasjonen */
+        aside a.active {
+            color: #ffffff;
+            background-color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Hovedområde for presentasjonen */
+        main {
+            margin-left: 300px;
+            padding: 3rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .presentation-container {
+            max-width: 900px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .meta-date {
+            font-family: monospace;
+            color: var(--accent-color);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+
+        /* Kodeblokker (viktig for kodeklubben!) */
+        pre {
+            background-color: #000000;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            color: #34d399; /* Fin grønnfarge for kode */
+        }
+
+        /* Responsivt design for mobil/små skjermer */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
             }
-        };
-    </script>
+            aside {
+                position: relative;
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1.5rem;
+            }
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            .presentation-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div class="reveal">
-        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
-<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
-Kodeklubben Lørenskog arrangerer gratis kodeklubb-kvelder to gang i måneden! Dette er tilpasset for barn og unge mellom 10 og 16 år. Vi som arrangerer kodeklubben gjør dette helt frivillig og vi får ingen økonomisk støtte fra noen. Biblioteket i Lørenskog får vi lov å bruke gratis. Vi liker å kode og vi vil gjerne lære bort litt til barn og unge. Foreldre er selvfølgelig også hjertelig velkomne og kan også gjerne hjelpe barna litt hvis det trengs. I kodeklubben kan man lære litt om koding og samtidig ha det gøy med det du lærer. Noen barn og unge lærer koding veldig raskt og kan mye fra før. Det er også gøy å finne opp din egen kode og se at den fungerer! 
+    <!-- Sidemeny med datoer (ÅÅÅÅMMDD) -->
+    <aside>
+        <h2>Møter & Presentasjoner</h2>
+        
+        <!-- Eksempel på hvordan du kan gruppere etter årstall -->
+        <div class="menu-section">
+            <div class="menu-section-title">2026</div>
+            <ul>
+                <li><a href="#20261001" class="active">20261001 (Dagens møte)</a></li>
+                <li><a href="#20260915">20260915</a></li>
+                <li><a href="#20260901">20260901</a></li>
+            </ul>
+        </div>
 
-Vi har dessverre ikke så mange PC'er til utlån, så det er bra å ha med egen PC eller nettbrett. Men vi har fått en del micro:bits og robotbiler fra Lær Kidsa Koding. Vi låner dem ut slik at alle kan prøve ut kodene og se at det fungerer i praksis selv. Det er ikke nødvendig å bruke spesielle programmer eller annet utstyr og det er ikke nødvendig å kunne koding fra før.
+        <div class="menu-section">
+            <div class="menu-section-title">2025</div>
+            <ul>
+                <li><a href="#20251201">20251201</a></li>
+            </ul>
+        </div>
+    </aside>
 
-Vi legger ut informasjon om arrangementene i Spond hvor du også kan melde deg på. Her er lenke til dette:
+    <!-- Her vises selve presentasjonen -->
+    <main>
+        <article class="presentation-container" id="20261001">
+            <span class="meta-date">Møte: 2026-10-01</span>
+            <h1>Velkommen til dagens koding!</h1>
+            
+            <p>Dette er eksempelinnholdet for presentasjonen din. Siden har fått en ren, helt mørk bakgrunn som matcher stilen din, og tekstbredden er optimalisert så den er behagelig å lese fra en skjerm eller projektor.</p>
+            
+            <h2>Dagens oppgave</h2>
+            <p>I dag skal vi se på hvordan vi kan endre farger og tekst ved hjelp av CSS og HTML.</p>
 
-https://spond.com/invite/DOCPH
+            <pre><code>// Eksempel på kode til barna
+function helloKodeklubben() {
+    console.log("Hei Lørenskog!");
+}</code></pre>
+        </article>
+    </main>
 
-Skoleåret 2026/2027 vil kodeklubben arrangere kodekvelder i Lørenskog bibliotek ca to ganger i måneden fra kl 18 til kl 19:30. Onsdagene vil spesielt være tilpasset nybegynnere og det blir mye blokkbasert programmering og vi bruker da for eksempel MakeCode for å kode med blokker. På torsdager vil vil prøve oss på litt mer avansert koding for de som ønsker det. Da vil vi bruke mer tekstbasert programmering, som for eksempel Python. Følgende datoer er planlagt for kodeklubben dette skoleåret:
-<table>
-<thead>
-<tr>
-<th dir="ltr">Onsdager (nybegynner)</th>
-<th dir="ltr">Torsdager (av og til mer avansert)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td dir="ltr">01. Møte 23. september 2026</td>
-<td dir="ltr">02. Møte 08. oktober 2026</td>
-</tr>
-<tr>
-<td dir="ltr">03. Møte 21. oktober 2026</td>
-<td dir="ltr">04. Møte 05. november 2026</td>
-</tr>
-<tr>
-<td dir="ltr">05. Møte 18. november 2026</td>
-<td dir="ltr">06. Møte 03. desember 2026</td>
-</tr>
-<tr>
-<td dir="ltr">07. Møte 16. desember 2026</td>
-<td dir="ltr">08. Møte 07. januar 2027</td>
-</tr>
-<tr>
-<td dir="ltr">09. Møte 20. januar 2027</td>
-<td dir="ltr">10. Møte 04. februar 2027</td>
-</tr>
-<tr>
-<td dir="ltr">11. Møte 17. februar 2027</td>
-<td dir="ltr">12. Møte 04. mars 2027</td>
-</tr>
-<tr>
-<td dir="ltr">13. Møte 17. mars 2027</td>
-<td dir="auto"></td>
-</tr>
-<tr>
-<td dir="ltr">14. Møte 14. april 2027</td>
-<td dir="ltr">15. Møte 29. april 2027</td>
-</tr>
-<tr>
-<td dir="ltr">16. Møte 12. mai 2027</td>
-<td dir="ltr">17. Møte 29. mai 2027</td>
-</tr>
-<tr>
-<td dir="ltr">18. Møte 09. juni 2027</td>
-<td dir="auto"></td>
-</tr>
-</tbody>
-</table>
-
-Velkommen!
-
-<img src="Kodeklubben lørenskog/Bilder/Bilde_fra_kodeklubben.jpg" alt="" style="object-fit: scale-down">
-</div></script></section></div>
-    </div>
-
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/obsidian-markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-
-    <script src="plugin/zoom/zoom.js"></script>
-    <script src="plugin/math/math.js"></script>
-    <script src="plugin/mermaid/mermaid.js"></script>
-    <script src="plugin/chart/chart.umd.js"></script>
-    <script src="plugin/chart/plugin.js"></script>
-    <script src="plugin/menu/menu.js"></script>
-    <script src="plugin/customcontrols/plugin.js"></script>
-    <script src="plugin/chalkboard/plugin.js"></script>
-    <script src="plugin/reveal-pointer/pointer.js"></script>
-    <script src="plugin/elapsed-time-bar/elapsed-time-bar.js"></script>
-
-
-    <script>
-        function extend() {
-            const target = {};
-            for (let i = 0; i < arguments.length; i++) {
-                const source = arguments[i];
-                for (const key in source) {
-                    if (source.hasOwnProperty(key)) {
-                        target[key] = source[key];
-                    }
-                }
-            }
-            return target;
-        }
-
-        function isLight(color) {
-            // normalize to rgb(a)
-            const optionEl = document.createElement("option");
-            optionEl.style.color = color;
-            const normalizedColor = optionEl.style.color;
-
-            const match = normalizedColor.match(/(\d+), (\d+), (\d+)/);
-            if (!match) return false;
-            const [, c_r, c_g, c_b] = match;
-
-            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
-            return brightness > 155;
-        }
-
-        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
-
-        if (isLight(bgColor)) {
-            document.body.classList.add('has-light-background');
-        } else {
-            document.body.classList.add('has-dark-background');
-        }
-
-        // default options to init reveal.js
-        const defaultOptions = {
-            controls: true,
-            progress: true,
-            history: true,
-            center: true,
-            transition: 'default', // none/fade/slide/convex/concave/zoom
-            plugins: [
-                ObsidianMarkdown,
-                RevealHighlight,
-                RevealZoom,
-                RevealNotes,
-                RevealMath.KaTeX,
-                RevealMermaid,
-                RevealChart,
-                RevealCustomControls,
-                RevealMenu,
-                RevealPointer,
-                RevealChalkboard,
-                ElapsedTimeBar
-            ],
-            allottedTime: "120",
-
-            katex: {
-                local: 'plugin/math/katex',
-                extensions: ["mhchem"],
-            },
-            markdown: {
-                gfm: true,
-            },
-            mermaid: {
-                theme: isLight(bgColor) ? 'default' : 'dark',
-            },
-            customcontrols: {
-                controls: [
-                    {
-                        id: 'toggle-overview',
-                        title: 'Toggle overview (O)',
-                        icon: '<i class="fa fa-th"></i>',
-                        action: 'Reveal.toggleOverview();'
-                    },
-                    {
-                        icon: '<i class="fa fa-pen-square"></i>',
-                        title: 'Toggle chalkboard (B)',
-                        action: 'RevealChalkboard.toggleChalkboard();'
-                    },
-                    {
-                        icon: '<i class="fa fa-pen"></i>',
-                        title: 'Toggle notes canvas (C)',
-                        action: 'RevealChalkboard.toggleNotesCanvas();'
-                    },
-                ]
-            },
-            menu: {
-                loadIcons: false
-            },
-        };
-
-        if ( pageInIframe() ) {
-            defaultOptions.scrollActivationWidth = 5;
-        }
-
-        // options from URL query string
-        const queryOptions = Reveal().getQueryHash() || {};
-
-        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"default","width":960,"height":700,"margin":0.04}, queryOptions);
-    </script>
-
-    <script>
-      /**
-       * KaTeX Equation Numbering Note
-       *
-       * KaTeX maintains a global equation counter for \begin{equation} environments.
-       * When navigating between slides, reveal.js math plugin may re-render math, causing
-       * equation numbers to change randomly.
-       *
-       * Note: Regular $$ blocks don't have equation numbers - only \begin{equation} does.
-       *
-       * If you experience issues with equation numbers changing:
-       * Use manual \tag{} commands: \begin{equation}\tag{1} ... \end{equation}
-       */
-
-      Reveal.initialize(options);
-    </script>
-    <!-- created with Slides Extended reveal.html template -->
 </body>
 </html>
