@@ -1,17 +1,106 @@
-<H1> Velkommen til kodeklubben i Lørenskog </H1>
-<H5>Kodeklubben i Lørenskog arrangerer gratis kodeklubb-kvelder to gang i måneden! Dette er tilpasset for barn og unge mellom 10 og 16 år. <br><br>
-Vi som arrangerer kodeklubben gjør dette helt frivillig og vi får ingen økonomisk støtte fra noen. Biblioteket i Lørenskog får vi lov til å bruke gratis. <br>
-Vi liker å kode og vi vil gjerne lære bort litt til barn og unge. I kodeklubben vil du kunne lære litt om koding og samtidig ha det gøy med det du lærer. <br>
-Vi har dessverre ikke så mange PC'er til utlån, så det er bra å ha med egen PC eller nettbrett. Men vi har fått en del micro:bits og robotbiler fra Lær Kidsa Koding. Vi låner dem ut slik at alle kan prøve ut kodene og se at det fungerer i praksis selv. Det er ikke nødvendig å bruke spesielle programmer eller annet utstyr og det er ikke nødvendig å kunne koding fra før.</H5>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-<H5>Vi legger ut informasjon om arrangementene i Spond hvor du også kan melde deg på. Her er lenke til dette:
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+    <link rel="stylesheet" href="plugin/chalkboard/style.css">
 
-<a href="https://spond.com/invite/DOCPH"> https://spond.com/invite/DOCPH</a></H5>
+    <link rel="stylesheet" href="plugin/reveal-pointer/pointer.css" />
 
-<H5>Skoleåret 2026/2027 vil kodeklubben arrangere kodekvelder i Lørenskog bibliotek ca to ganger i måneden fra kl 18 til kl 19:30. <br>
-Onsdagene vil spesielt være tilpasset nybegynnere og det blir mye blokkbasert programmering og vi bruker da for eksempel MakeCode for å kode med blokker. <br>
-På noen torsdager vil vil prøve oss på litt mer avansert koding for de som ønsker det. Da vil vi bruke mer tekstbasert programmering, som for eksempel Python. <br>
-Følgende datoer er planlagt for kodeklubben dette skoleåret:</H5>
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+Kodeklubben Lørenskog arrangerer gratis kodeklubb-kvelder to gang i måneden! Dette er tilpasset for barn og unge mellom 10 og 16 år. Vi som arrangerer kodeklubben gjør dette helt frivillig og vi får ingen økonomisk støtte fra noen. Biblioteket i Lørenskog får vi lov å bruke gratis. Vi liker å kode og vi vil gjerne lære bort litt til barn og unge. Foreldre er selvfølgelig også hjertelig velkomne og kan også gjerne hjelpe barna litt hvis det trengs. I kodeklubben kan man lære litt om koding og samtidig ha det gøy med det du lærer. Noen barn og unge lærer koding veldig raskt og kan mye fra før. Det er også gøy å finne opp din egen kode og se at den fungerer! 
+
+Vi har dessverre ikke så mange PC'er til utlån, så det er bra å ha med egen PC eller nettbrett. Men vi har fått en del micro:bits og robotbiler fra Lær Kidsa Koding. Vi låner dem ut slik at alle kan prøve ut kodene og se at det fungerer i praksis selv. Det er ikke nødvendig å bruke spesielle programmer eller annet utstyr og det er ikke nødvendig å kunne koding fra før.
+
+Vi legger ut informasjon om arrangementene i Spond hvor du også kan melde deg på. Her er lenke til dette:
+
+https://spond.com/invite/DOCPH
+
+Skoleåret 2026/2027 vil kodeklubben arrangere kodekvelder i Lørenskog bibliotek ca to ganger i måneden fra kl 18 til kl 19:30. Onsdagene vil spesielt være tilpasset nybegynnere og det blir mye blokkbasert programmering og vi bruker da for eksempel MakeCode for å kode med blokker. På torsdager vil vil prøve oss på litt mer avansert koding for de som ønsker det. Da vil vi bruke mer tekstbasert programmering, som for eksempel Python. Følgende datoer er planlagt for kodeklubben dette skoleåret:
 <table>
 <thead>
 <tr>
@@ -21,7 +110,7 @@ Følgende datoer er planlagt for kodeklubben dette skoleåret:</H5>
 </thead>
 <tbody>
 <tr>
-<td dir="ltr"><a href="https://vegardsaether.github.io/Kodeklubben-Lorenskog/20260923.html#/">01. Møte 23. september 2026</a></td>
+<td dir="ltr">01. Møte 23. september 2026</td>
 <td dir="ltr">02. Møte 08. oktober 2026</td>
 </tr>
 <tr>
@@ -62,5 +151,151 @@ Følgende datoer er planlagt for kodeklubben dette skoleåret:</H5>
 </tr>
 </tbody>
 </table>
-<br><br>
-<H1><p>Velkommen!</p></H1>
+
+Velkommen!
+
+<img src="Kodeklubben lørenskog/Bilder/Bilde_fra_kodeklubben.jpg" alt="" style="object-fit: scale-down">
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/obsidian-markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.umd.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+    <script src="plugin/chalkboard/plugin.js"></script>
+    <script src="plugin/reveal-pointer/pointer.js"></script>
+    <script src="plugin/elapsed-time-bar/elapsed-time-bar.js"></script>
+
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            // normalize to rgb(a)
+            const optionEl = document.createElement("option");
+            optionEl.style.color = color;
+            const normalizedColor = optionEl.style.color;
+
+            const match = normalizedColor.match(/(\d+), (\d+), (\d+)/);
+            if (!match) return false;
+            const [, c_r, c_g, c_b] = match;
+
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                ObsidianMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.KaTeX,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+                RevealMenu,
+                RevealPointer,
+                RevealChalkboard,
+                ElapsedTimeBar
+            ],
+            allottedTime: "120",
+
+            katex: {
+                local: 'plugin/math/katex',
+                extensions: ["mhchem"],
+            },
+            markdown: {
+                gfm: true,
+            },
+            mermaid: {
+                theme: isLight(bgColor) ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                    {
+                        id: 'toggle-overview',
+                        title: 'Toggle overview (O)',
+                        icon: '<i class="fa fa-th"></i>',
+                        action: 'Reveal.toggleOverview();'
+                    },
+                    {
+                        icon: '<i class="fa fa-pen-square"></i>',
+                        title: 'Toggle chalkboard (B)',
+                        action: 'RevealChalkboard.toggleChalkboard();'
+                    },
+                    {
+                        icon: '<i class="fa fa-pen"></i>',
+                        title: 'Toggle notes canvas (C)',
+                        action: 'RevealChalkboard.toggleNotesCanvas();'
+                    },
+                ]
+            },
+            menu: {
+                loadIcons: false
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"default","width":960,"height":700,"margin":0.04}, queryOptions);
+    </script>
+
+    <script>
+      /**
+       * KaTeX Equation Numbering Note
+       *
+       * KaTeX maintains a global equation counter for \begin{equation} environments.
+       * When navigating between slides, reveal.js math plugin may re-render math, causing
+       * equation numbers to change randomly.
+       *
+       * Note: Regular $$ blocks don't have equation numbers - only \begin{equation} does.
+       *
+       * If you experience issues with equation numbers changing:
+       * Use manual \tag{} commands: \begin{equation}\tag{1} ... \end{equation}
+       */
+
+      Reveal.initialize(options);
+    </script>
+    <!-- created with Slides Extended reveal.html template -->
+</body>
+</html>
